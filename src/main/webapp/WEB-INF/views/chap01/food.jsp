@@ -9,7 +9,7 @@
 <body>
 <h1>food.jsp입니다.</h1>
 
-<form action="#" method="post">
+<form action="/food-select" method="post">
     # 음식명: <input type="text" name="foodName"> <br>
     # 음식 카테고리:
     <select name="category">
