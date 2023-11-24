@@ -58,12 +58,13 @@ public class ScoreController {
 //    - 저장된 성적정보 리스트를 jsp에 보내줘여 함 (model에 데이터 전송)
 //    - 저장된 성적정버 리스트를 어떻게 가져오느냐 (form 데이터베이스)
     @GetMapping("/list")
-    public String list(Model model){
+    public String list(Model model,
+                       @RequestParam(defaultValue = "num") String sort){
         System.out.println("/score/list GET ");
-        List<Score> slist = repository.findAll();
+        List<Score> scoreList = repository.findAll(sort);
 
-        System.out.println("slist = " + slist);
-        model.addAttribute("sList", slist);
+        System.out.println("sList = " + scoreList);
+        model.addAttribute("sList", scoreList);
 
         return "chap04/score-list";
     }
@@ -100,20 +101,24 @@ public class ScoreController {
         return "redirect:/score/list";
     }
 //    3. 성적 삭제 요청
-    @RequestMapping(value = "/remove/{stdNum}", method = {GET, POST})
+    @RequestMapping(value = "/remove/{stuNum}", method = {GET, POST})
     public String remove(HttpServletRequest request,
-                         @PathVariable int stdNum){
+                         @PathVariable int stuNum){
         System.out.printf("/score/remove %s \n", request.getMethod());
-        System.out.println("stdNum = " + stdNum);
-        repository.delete(stdNum);
+        System.out.println("stuNum = " + stuNum);
+        repository.delete(stuNum);
 
         return "redirect:/score/list";
     }
 //    4. 성적 상제 조회 요청
     @GetMapping("/detail")
-    public String detail(){
+    public String detail(int stuNum, Model model){
         System.out.println("/score/detail GET ");
-        return "";
+
+        Score score = repository.findOne(stuNum);
+        model.addAttribute("s", score);
+
+        return "chap04/score-detail";
     }
 
 }
