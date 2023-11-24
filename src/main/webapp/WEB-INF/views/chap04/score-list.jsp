@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %> //jsp
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -117,7 +117,7 @@
                     # 학번: ${s.stuNum}, 이름: <a href="#">${s.name}</a>,
                     국어: ${s.kor}점, 영어: ${s.eng}점, 수학: ${s.math}점,
                     총점: ${s.total}점, 평균: ${s.average}점, 학점: ${s.grade}
-                    <a class="del-btn" href="#">삭제</a>
+                    <a class="del-btn" href="/score/remove/${s.stuNum}">삭제</a>
                 </li>
             </c:forEach>
 

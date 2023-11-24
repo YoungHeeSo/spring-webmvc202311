@@ -1,5 +1,6 @@
 package com.spring.mvc.chap04.controller;
 
+import com.spring.mvc.chap04.dto.ScoreRequestDTO;
 import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.chap04.repository.ScoreRepository;
 import com.spring.mvc.chap04.repository.ScoreRepositoryImpl;
@@ -8,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -66,19 +64,50 @@ public class ScoreController {
 
         System.out.println("slist = " + slist);
         model.addAttribute("sList", slist);
+
         return "chap04/score-list";
     }
 //    2. 성적 정보를 데이터베이스에 저장하는 요청
     @PostMapping("/register")
-    public String register(){
+    public String register(ScoreRequestDTO score){
         System.out.println("/score/register GET ");
-        return "";
+
+        System.out.println("score = " + score);
+
+//        DTO 객체를 엔터티로 변환 -> 데이터 생성
+        Score saveScore = new Score(score);
+
+        repository.save(saveScore);
+
+        /**
+         * forward vs redirect
+         *
+         * forward : 요청 리소스를 그대로 전달해줌
+         *          따라서 URL 변경이 되지 않고 한번의 요청과 한번의 응답만 이루어짐
+         *
+         * redirect : 요청 후 자동 응답이 나가고, 2번째 자동 요청이 들어오면서 2번째 응답을 내보냄
+         *          따라서 2번째 요청이 URL으로 자동 변경됨
+         */
+
+        /**
+         * forward 할 때는 포워딩 할 파일의 경로를 적는 것
+         * ex ) WEB-INF/views/chap04/score-list.jsp
+         *
+         * redirect 할 때는 리다리렉트 요청 URL을 적는 것
+         * ex ) http://localhost:8181/score/detail
+         */
+
+        return "redirect:/score/list";
     }
 //    3. 성적 삭제 요청
-    @RequestMapping(value = "/remove", method = {GET, POST})
-    public String remove(HttpServletRequest request){
+    @RequestMapping(value = "/remove/{stdNum}", method = {GET, POST})
+    public String remove(HttpServletRequest request,
+                         @PathVariable int stdNum){
         System.out.printf("/score/remove %s \n", request.getMethod());
-        return "";
+        System.out.println("stdNum = " + stdNum);
+        repository.delete(stdNum);
+
+        return "redirect:/score/list";
     }
 //    4. 성적 상제 조회 요청
     @GetMapping("/detail")
