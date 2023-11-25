@@ -1,6 +1,7 @@
 package com.spring.mvc.chap04.controller;
 
 import com.spring.mvc.chap04.dto.ScoreRequestDTO;
+import com.spring.mvc.chap04.dto.ScoreResponseDTO;
 import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.chap04.repository.ScoreRepository;
 import com.spring.mvc.chap04.repository.ScoreRepositoryImpl;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -61,10 +64,26 @@ public class ScoreController {
     public String list(Model model,
                        @RequestParam(defaultValue = "num") String sort){
         System.out.println("/score/list GET ");
+
+//        db에서 조회한 모든 데이터
         List<Score> scoreList = repository.findAll(sort);
 
-        System.out.println("sList = " + scoreList);
-        model.addAttribute("sList", scoreList);
+//        클라이언트가 필요한 일부 데이터
+        /*List<ScoreResponseDTO> dtoList = new ArrayList<>();
+        for (Score score: scoreList) {
+            *//*dtoList.add(new ScoreResponseDTO( score.getStuNum(), score.getName(),
+                    score.getAverage(), score.getGrade()));*//*
+            dtoList.add(new ScoreResponseDTO(score));
+
+        }*/
+
+
+        List<ScoreResponseDTO> dtoList = scoreList.stream()
+//                .map(score -> new ScoreResponseDTO(score))
+                .map(ScoreResponseDTO::new)
+                .collect(Collectors.toList());
+
+        model.addAttribute("sList", dtoList);
 
         return "chap04/score-list";
     }
