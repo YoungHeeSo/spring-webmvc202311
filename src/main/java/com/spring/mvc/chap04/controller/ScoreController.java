@@ -134,10 +134,42 @@ public class ScoreController {
     public String detail(int stuNum, Model model){
         System.out.println("/score/detail GET ");
 
-        Score score = repository.findOne(stuNum);
-        model.addAttribute("s", score);
+        retrieve(stuNum, model);
 
         return "chap04/score-detail";
+    }
+
+    private void retrieve(int stuNum, Model model) {
+        Score score = repository.findOne(stuNum);
+        model.addAttribute("s", score);
+    }
+
+    //    5. 수정 입력 폼을 열어주는 요청
+//    /score/modify : GET
+    @GetMapping("modify")
+    public String modify(int stuNum, Model model){
+        System.out.println("/score/modify GET ");
+
+        retrieve(stuNum, model);
+
+        return "chap04/score-modify";
+    }
+
+//    6. 수정 처리 요청
+//   score/modify : POST
+    @PostMapping("modify")
+    public String modify(int stuNum, ScoreRequestDTO dto){
+        System.out.println("/score/modify POST ");
+
+        /**
+         * 수정의 흐름
+         * 클라이언트가 수정할 데이터를 보냄
+         * -> 서버에 저장되어 있는 기존 데이터를 조회해서 수정
+         */
+        Score score = repository.findOne(stuNum);
+        score.changeScore(dto);
+
+        return "redirect:/score/detail?stuNum=" + stuNum;
     }
 
 }
