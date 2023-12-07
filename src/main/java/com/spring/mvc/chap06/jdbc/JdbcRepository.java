@@ -15,7 +15,7 @@ public class JdbcRepository {
 //    db 연결 설정 정보
     private  String url = "jdbc:mariadb://localhost:3306/spring"; // 데이터베이스 URL
     private String username = "root";
-    private String password = "mariadb";
+    private String password = "1234";
 
 //    JDBC 드라이버 로딩
     public JdbcRepository(){
@@ -226,9 +226,10 @@ public class JdbcRepository {
 
             try{
 
-//            1) 데이터베이스에 연결해서 연결 정보 획든
+//            1) 데이터베이스에 연결해서 연결 정보 획득
                 Connection con = DriverManager.getConnection(url, username, password);
 
+//            2) SQL 생성
 //            2) SQL 생성
                 String sql = "select * from person where id = ?";
 

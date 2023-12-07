@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static java.util.Comparator.*;
 import static java.util.stream.Collectors.*;
 
-@Repository
+@Repository("mRepo")
 public class ScoreRepositoryImpl implements ScoreRepository{
 
 //    인메모리 저장공간인 해시맵 생성

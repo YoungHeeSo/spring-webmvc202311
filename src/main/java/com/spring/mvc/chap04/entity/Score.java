@@ -16,6 +16,21 @@ import static com.spring.mvc.chap04.entity.Grade.*;
 @AllArgsConstructor
 public class Score {
 
+    /*
+    # 성적 테이블 생성
+    create table tbl_score(
+    stu_num INT(10) primary key auto_increment,
+    stu_name varchar(255) not null ,
+    kor INT(3) not null ,
+    eng INT(3) not null ,
+    math INT(3) not null ,
+    total INT(3) not null ,
+    average float(5, 2) not null ,
+    #100.00 5자리, 소수점 2번째 자리까지
+    grade char(1)
+);
+     */
+
     private String name; // 학생 이름
     private int kor, eng, math; // 국영수 점수
 
