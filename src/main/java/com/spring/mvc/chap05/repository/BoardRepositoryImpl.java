@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Repository()
+//@Repository()
 public class BoardRepositoryImpl implements BoardRepository{
 
     static private final Map<Integer, Board> boardMap;
@@ -28,9 +28,7 @@ public class BoardRepositoryImpl implements BoardRepository{
         boardMap.put(b1.getBoardNo(), b1);
         boardMap.put(b2.getBoardNo(), b2);
         boardMap.put(b3.getBoardNo(), b3);
-
     }
-
 
     @Override
     public List<Board> findAll() {

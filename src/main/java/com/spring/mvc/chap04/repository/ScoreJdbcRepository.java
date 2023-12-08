@@ -18,26 +18,49 @@ public class ScoreJdbcRepository implements ScoreRepository{
 
     @Override
     public List<Score> findAll() {
+
         return null;
     }
 
     @Override
     public List<Score> findAll(String sort) {
-        return Collections.emptyList();
+        String sql = "select * from tbl_score";
+
+        switch (sort) {
+            case "num":
+                sql += " order by stu_num";
+                break;
+            case "name":
+                sql += " order by stu_name";
+                break;
+            case "avg":
+                sql += " order by average DESC";
+                break;
+        }
+
+        return template.query(sql, (rs, rn) -> new Score(rs));
     }
 
     @Override
     public boolean save(Score score) {
-        return false;
+        String sql = "insert into tbl_score " +
+                "(stu_name, kor, eng, math, total, average, grade) " +
+                "values(?, ?, ?, ?, ?, ?, ?)";
+
+        return template.update(sql, score.getName(), score.getKor(), score.getEng(), score.getMath(),
+                score.getTotal(), score.getAverage(), score.getGrade().toString())==1;
     }
 
     @Override
     public boolean delete(int stuNum) {
-        return false;
+        String sql = "delete from tbl_score where stu_num=?";
+        return template.update(sql, stuNum)==1;
     }
 
     @Override
     public Score findOne(int stuNum) {
-        return null;
+        String sql = "select * from tbl_score where stu_num=?";
+
+        return template.queryForObject(sql, (rs, rn) -> new Score(rs), stuNum);
     }
 }

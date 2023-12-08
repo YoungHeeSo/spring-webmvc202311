@@ -50,6 +50,7 @@ public class BoardService {
 
 //        조회수 상승 처리
         board.upViewCount();
+        boardRepository.updateViewCount(bno);
 
         return new BoardDetailResponseDTO(board);
     }

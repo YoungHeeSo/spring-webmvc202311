@@ -20,5 +20,8 @@ public interface BoardRepository {
 //    게시물 삭제
     boolean deleteByNo(int boardNo); // 게시물 번호를 받아서 삭제하겠다
 
+//    조회수 상승 기능
+    default void updateViewCount(int boardNo) {};
+
 
 }
