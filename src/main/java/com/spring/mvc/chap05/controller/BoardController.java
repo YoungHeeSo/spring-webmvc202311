@@ -1,5 +1,6 @@
 package com.spring.mvc.chap05.controller;
 
+import com.spring.mvc.chap05.common.Page;
 import com.spring.mvc.chap05.dto.BoardListResponseDTO;
 import com.spring.mvc.chap05.dto.BoardWriteRequestDTO;
 import com.spring.mvc.chap05.entity.Board;
@@ -23,10 +24,11 @@ public class BoardController {
 
     // 1. 목록 조회 요청 (/board/list : GET)
     @GetMapping("/list")
-    public String list(Model model){
+    public String list(Page page, Model model){
         System.out.println("/board/list : GET !");
+        System.out.println("page = " + page);
 
-        List<BoardListResponseDTO> dtolist = boardService.getList();
+        List<BoardListResponseDTO> dtolist = boardService.getList(page);
         model.addAttribute("bList", dtolist);
 
         return "chap05/list";

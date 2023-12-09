@@ -9,6 +9,8 @@
     <select id="findAll" resultType="board">
         select * from tbl_board
         order by board_no desc
+<!--        limit #{}, #{}-->
+        limit #{pageStart}, #{amount}
     </select>
 
     <select id="findOne" resultType="board">

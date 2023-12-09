@@ -62,8 +62,18 @@
             </div>
         </c:forEach>
 
-
     </div>
+
+    <ul style="display: flex">
+        <li><a href="/board/list?pageNo=1">1</a></li>
+        <li><a href="/board/list?pageNo=2">2</a></li>
+        <li><a href="/board/list?pageNo=3">3</a></li>
+        <li><a href="/board/list?pageNo=4">4</a></li>
+        <li><a href="/board/list?pageNo=5">5</a></li>
+
+    </ul>
+
+
 
 </div>
 

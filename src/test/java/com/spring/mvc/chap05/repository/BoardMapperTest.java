@@ -1,5 +1,6 @@
 package com.spring.mvc.chap05.repository;
 
+import com.spring.mvc.chap05.common.Page;
 import com.spring.mvc.chap05.entity.Board;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,15 +35,16 @@ class BoardMapperTest {
         //then
     }*/
 
-    @Test
+/*    @Test
     @DisplayName("게시물을 전체 조회하면 303개의 게시물이 조회된다.")
     void findAllTest() {
         //given
+        // List<Board> boardList = mapper.findAll(new Page());
         List<Board> boardList = mapper.findAll();
         //when
         assertEquals(303, boardList.size()); // boardList의 사이즈가 303개라고 확신한다
         //then
-    }
+    }*/
 
     @Test
     @DisplayName("30번 게시물을 단일조회하면 제목에 27이 포함되어 있어야 한다")

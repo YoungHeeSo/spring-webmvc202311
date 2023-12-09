@@ -1,9 +1,11 @@
 package com.spring.mvc.chap05.service;
 
+import com.spring.mvc.chap05.common.Page;
 import com.spring.mvc.chap05.dto.BoardDetailResponseDTO;
 import com.spring.mvc.chap05.dto.BoardListResponseDTO;
 import com.spring.mvc.chap05.dto.BoardWriteRequestDTO;
 import com.spring.mvc.chap05.entity.Board;
+import com.spring.mvc.chap05.repository.BoardMapper;
 import com.spring.mvc.chap05.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,8 @@ import java.util.stream.Collectors;
 @Service
 public class BoardService {
 
-    private final BoardRepository boardRepository;
+//    private final BoardRepository boardRepository;
+    private final BoardMapper boardRepository;
 
     /*@Autowired
     public BoardService(BoardRepository boardRepository) {
@@ -24,9 +27,9 @@ public class BoardService {
     }*/
 
 //  목록 조회 중간 처리
-    public List<BoardListResponseDTO> getList(){
+    public List<BoardListResponseDTO> getList(Page page){
 
-        return boardRepository.findAll()
+        return boardRepository.findAll(page)
                 .stream()
                 .map(BoardListResponseDTO::new)
                 .collect(Collectors.toList());

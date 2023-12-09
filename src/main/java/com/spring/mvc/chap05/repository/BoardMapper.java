@@ -1,5 +1,6 @@
 package com.spring.mvc.chap05.repository;
 
+import com.spring.mvc.chap05.common.Page;
 import com.spring.mvc.chap05.entity.Board;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public interface BoardMapper {
 
     //    목록 조회
-    List<Board> findAll(); // 게시물 정보가 들어있는 리스트
+    List<Board> findAll(Page page); // 게시물 정보가 들어있는 리스트
 
     //    상세 조회
     Board findOne(int boardNo); // 특정 글 하나를 구분하기 위해서 글 번호를 받아
