@@ -15,6 +15,9 @@ public class PageMaker {
     // 이전, 다음 버튼 활성화 여부
     private boolean prev, next;
 
+    // 시작, 끝 버튼 활성화 여부
+    private boolean start, finish;
+
     // 현재 페이지 정보
     private Page page;
 
@@ -77,7 +80,6 @@ public class PageMaker {
             - 마지막 구간 보정 공식
 
             올림 (총 게시물 수 / 한 페이지에 배치할 게시물의 수)
-
             ex)  237 / 10 => 23.7  => 올림 24
          */
 
@@ -89,5 +91,12 @@ public class PageMaker {
 
         // 4. next활성화 여부 - 마지막 페이지구간에서만 비활성화
         this.next = this.end < this.finalPage;
+
+        // 5. 마지막 페이지로 이동 활성화 여부 - 마지막 페이지구간에서만 비활성화
+        this.finish = this.end < this.finalPage;
+
+        // 6. 첫 페이지로 이동 활성화 여부 - 첫 페이지에서만 비활성화
+        this.start = this.begin > 1;
+
     }
 }
