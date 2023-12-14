@@ -31,4 +31,5 @@ public class Page {
     public int getPageStart(){
         return (pageNo-1)*amount;
     }
+
 }

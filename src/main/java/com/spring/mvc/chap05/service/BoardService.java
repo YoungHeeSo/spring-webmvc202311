@@ -21,6 +21,10 @@ public class BoardService {
 //    private final BoardRepository boardRepository;
     private final BoardMapper boardRepository;
 
+    public int getCount(){
+        return boardRepository.count();
+    }
+
     /*@Autowired
     public BoardService(BoardRepository boardRepository) {
         this.boardRepository = boardRepository;

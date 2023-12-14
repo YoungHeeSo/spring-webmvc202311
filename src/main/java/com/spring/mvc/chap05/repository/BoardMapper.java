@@ -24,4 +24,6 @@ public interface BoardMapper {
     //    조회수 상승 기능
     void updateViewCount(int boardNo);
 
+    //    총 게시물 수 구하기
+    int count();
 }

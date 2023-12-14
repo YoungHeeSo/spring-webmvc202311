@@ -8,7 +8,7 @@ import java.util.List;
 // 게시판 CRUD 기능 명세
 public interface BoardRepository {
 
-//    목록 조회
+    //    목록 조회
     List<Board> findAll(); // 게시물 정보가 들어있는 리스트
 
 //    상세 조회
