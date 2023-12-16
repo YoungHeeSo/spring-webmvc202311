@@ -1,0 +1,47 @@
+
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mvc.chap05.repository.ReplyMapper">
+
+    <insert id="save">
+        insert into tbl_reply
+            (reply_text, reply_writer, board_no)
+        values
+            (#{replyText},#{replyWriter},#{boardNo})
+    </insert>
+
+    <update id="modify">
+        update tbl_reply
+        set reply_text = #{replyText}
+        where reply_no = #{replyNo}
+    </update>
+
+    <delete id="delete">
+        delete from tbl_reply
+        where reply_no = #{replyNo}
+    </delete>
+
+    <select id="findOne" resultType="reply">
+        select reply_no, reply_text, reply_writer, reply_date, board_no
+        from tbl_reply
+        where reply_no = #{replyNo}
+    </select>
+
+    <select id="findAll" resultType="reply">
+        select reply_no, reply_text, reply_writer, reply_date, board_no
+        from tbl_reply
+        where board_no = #{boardNo}
+        order by board_no;
+        <!--where reply_no = #{replyNo}
+        order by reply_no-->
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*)
+        from tbl_reply
+        where board_no = #{boardNO}
+    </select>
+</mapper>
