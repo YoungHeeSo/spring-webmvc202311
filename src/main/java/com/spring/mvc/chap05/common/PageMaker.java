@@ -66,7 +66,6 @@ public class PageMaker {
          */
         this.prev = begin > 1;
 
-
         /*
             # end 값 보정
 

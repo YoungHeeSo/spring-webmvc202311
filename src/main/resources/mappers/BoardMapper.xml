@@ -24,6 +24,7 @@
 
         order by board_no desc
         limit #{pageStart}, #{amount}
+
     </select>
 
     <select id="findOne" resultType="board">

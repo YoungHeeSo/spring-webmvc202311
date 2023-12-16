@@ -55,10 +55,15 @@
             </form>
         </div>
 
-        
+
+        <div class="amount">
+            <div><a href="/board/list?pageNo=${s.pageNo}&type=${s.type}&keyword=${s.keyword}&amount=6">6</a></div>
+            <div><a href="/board/list?pageNo=${s.pageNo}&type=${s.type}&keyword=${s.keyword}&amount=18">18</a></div>
+            <div><a href="/board/list?pageNo=${s.pageNo}&type=${s.type}&keyword=${s.keyword}&amount=30">30</a></div>
+        </div>
+
 
     </div>
-
 
     <div class="card-container">
         <c:forEach var="b" items="${bList}">
@@ -77,9 +82,7 @@
                         </div>
                     </div>
                     <div class="card-content">
-
-                            ${b.shortContent}
-
+                        ${b.shortContent}
                     </div>
                 </section>
                 <div class="card-btn-group">
@@ -111,27 +114,27 @@
                 </c:if>--%>
 
                 <c:if test="${maker.start}">
-                    <li class="page-item"><a class="page-link" href="/board/list?pageNo=1&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="/board/list?pageNo=1&type=${s.type}&keyword=${s.keyword}&amount=${s.amount}">&lt;&lt;</a></li>
                 </c:if>
 
                 <c:if test="${maker.prev}">
-                    <li class="page-item"><a class="page-link" href="/board/list?pageNo=${maker.begin - 1}&type=${s.type}&keyword=${s.keyword}">prev</a></li>
+                    <li class="page-item"><a class="page-link" href="/board/list?pageNo=${maker.begin - 1}&type=${s.type}&keyword=${s.keyword}&amount=${s.amount}">prev</a></li>
                 </c:if>
 
                 <c:forEach var="i" begin="${maker.begin}" end="${maker.end}" step="1">
                     <li data-page-num="${i}" class="page-item">
-                        <a class="page-link" href="/board/list?pageNo=${i}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+                        <a class="page-link" href="/board/list?pageNo=${i}&type=${s.type}&keyword=${s.keyword}&amount=${s.amount}">${i}</a>
                     </li>
                 </c:forEach>
 
                 <c:if test="${maker.next}">
                     <li class="page-item">
-                        <a class="page-link" href="/board/list?pageNo=${maker.end + 1}&type=${s.type}&keyword=${s.keyword}">next</a>
+                        <a class="page-link" href="/board/list?pageNo=${maker.end + 1}&type=${s.type}&keyword=${s.keyword}&amount=${s.amount}">next</a>
                     </li>
                 </c:if>
 
                 <c:if test="${maker.finish}">
-                    <li class="page-item"><a class="page-link" href="/board/list?pageNo=${ maker.finalPage }&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a></li>
+                    <li class="page-item"><a class="page-link" href="/board/list?pageNo=${ maker.finalPage }&type=${s.type}&keyword=${s.keyword}&amount=${s.amount}">&gt;&gt;</a></li>
                 </c:if>
 
                 <%-- 맨 끝페이지 이동 풀이 --%>
@@ -195,7 +198,7 @@
             // section태그에 붙은 글번호 읽기
             const bno = e.target.closest('section.card').dataset.bno;
             // 요청 보내기
-            window.location.href= '/board/detail?bno=' + bno + '&pageNo=${s.pageNo}&type=${s.type}&keyword=${s.keyword}';
+            window.location.href= '/board/detail?bno=' + bno + '&pageNo=${s.pageNo}&type=${s.type}&keyword=${s.keyword}&amount=${s.amount}';
         }
     });
 
@@ -284,7 +287,6 @@
                 $opt.setAttribute('selected', 'selected');
             }
         });
-
     }
 
     appendPageActive();

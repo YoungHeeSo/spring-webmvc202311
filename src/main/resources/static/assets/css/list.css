@@ -264,3 +264,35 @@
     flex: 3;
 }
 
+
+
+.top-section .amount {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.top-section .amount div {
+    margin-left: 15px;
+    padding: 12px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: darkorange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.top-section .amount div:hover {
+    border-radius: 0;
+    background: coral;
+}
+.top-section .amount div:last-child {
+    margin-right: 10%;
+}
+.top-section .amount div a {
+    display: block;
+    color: #fff;
+    font-size: 1.4em;
+    text-decoration: none;
+}
