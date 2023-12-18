@@ -33,8 +33,10 @@
     <select id="findAll" resultType="reply">
         select reply_no, reply_text, reply_writer, reply_date, board_no
         from tbl_reply
-        where board_no = #{boardNo}
-        order by board_no;
+        where board_no = #{bn}
+        order by board_no
+        limit #{p.pageStart}, #{p.amount};
+        <!--        limit #{p.pageStart}, #{p.amount}-->
         <!--where reply_no = #{replyNo}
         order by reply_no-->
     </select>
@@ -42,6 +44,6 @@
     <select id="count" resultType="int">
         select count(*)
         from tbl_reply
-        where board_no = #{boardNO}
+        where board_no = #{boardNo}
     </select>
 </mapper>

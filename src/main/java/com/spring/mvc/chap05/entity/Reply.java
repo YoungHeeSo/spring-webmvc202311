@@ -18,6 +18,7 @@ package com.spring.mvc.chap05.entity;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter @ToString
 @EqualsAndHashCode
@@ -30,7 +31,7 @@ public class Reply {
     @Setter
     private String replyText;
     private String replyWriter;
-    private LocalDate replyDate;
+    private LocalDateTime replyDate;
     private long boardNo;
 
 }
