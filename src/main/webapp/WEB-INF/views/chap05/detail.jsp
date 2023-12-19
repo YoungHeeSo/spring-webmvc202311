@@ -95,6 +95,20 @@
             background: #e61e8c93;
         }
 
+        /* 페이지 css */
+        /* 페이지 액티브 기능 */
+        .pagination .page-item.p-active a {
+            background: #333 !important;
+            color: #fff !important;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .pagination .page-item:hover a {
+            background: #888 !important;
+            color: #fff !important;
+        }
+
     </style>
 </head>
 <body>
@@ -203,9 +217,43 @@
 
     // 댓글 관련 비동기 통신 (AJAX) 스크립트
 
+    // 화면에 페이지들을 렌더링하는 함수
+    function renderPage({begin, end, prev, next, page, finalPage}) {
+
+        let tag = "";
+
+        //이전 버튼 만들기
+        if (prev) {
+            tag += `<li class='page-item'><a class='page-link page-active' href='\${begin - 1}'>이전</a></li>`;
+        }
+        // 페이지 번호 리스트 만들기
+        for (let i = begin; i <= end; i++) {
+            let active = '';
+            if (page.pageNo === i) {
+                active = 'p-active';
+            }
+
+            tag += `<li class='page-item \${active}'><a class='page-link page-custom' href='\${i}'>\${i}</a></li>`;
+        }
+        //다음 버튼 만들기
+        if (next) {
+            tag += `<li class='page-item'><a class='page-link page-active' href='\${end + 1}'>다음</a></li>`;
+        }
+
+        // 페이지태그 렌더링
+        const $pageUl = document.querySelector('.pagination');
+        $pageUl.innerHTML = tag;
+
+        // ul에 마지막페이지 번호 저장.
+        $pageUl.dataset.fp = finalPage;
+
+    }
+
+
     // 화면에 댓글 태그 들을 렌더링 하는 함수
-    function renderReplies({replies, count}){
+    function renderReplies({replies, count, pageInfo}){
         let tag = '';
+
 
         for (let reply of replies) {
             const { rno, writer, text, regDate } = reply;
@@ -232,6 +280,9 @@
             // 댓글 렌더링
             document.getElementById('replyData').innerHTML = tag;
 
+            // 페이지 렌더링
+            renderPage(pageInfo);
+
 
         }
     }
@@ -243,20 +294,38 @@
             .then(res => res.json())
             .then(replyList=>{
                 console.log(replyList);
-
                 renderReplies(replyList);
             })
         ;
     }
 
+    // 페이지 클릭 이벤트 핸들러 등록 함수
+    function makePageButtonClickEvent(){
+
+        const $pageUl = document.querySelector('.pagination');
+
+        $pageUl.onclick = e => {
+
+            // 이벤트 타겟이 a 링크가 아닌경우 href 속성을 못 가져올 수 있으니 타겟 제한하기
+            if(!e.target.matches('.page-item a')) return;
+
+            e.preventDefault(); // href 링크 이동 기능 중단 : 태그 기본 기능 동작 중단
+
+            // 페이지 번호에 맞는 새로운 댓글 목록 비동기 요청
+            fetchGetReplies(e.target.getAttribute('href'));
+        }
+    }
+
     // ========== 메인 실행부 ========== //
 
-    // 함수를 만들고 즉시 실행 하겠다 => 즉시 실행함수
+    // 함수를 만들고 즉시 실행 하겠다 => 즉시 실행 함수
     (()=>{
         // 댓글 서버에서 불러오기
         fetchGetReplies();
-    })();
 
+        // 페이지 번호 클릭 이벤트 핸들러 처리
+        makePageButtonClickEvent();
+    })();
 
 </script>
 

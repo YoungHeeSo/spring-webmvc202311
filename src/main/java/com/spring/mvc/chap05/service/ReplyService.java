@@ -1,6 +1,7 @@
 package com.spring.mvc.chap05.service;
 
 import com.spring.mvc.chap05.common.Page;
+import com.spring.mvc.chap05.common.PageMaker;
 import com.spring.mvc.chap05.dto.response.ReplyDetailResponseDTO;
 import com.spring.mvc.chap05.dto.response.ReplyListResponseDTO;
 import com.spring.mvc.chap05.entity.Reply;
@@ -32,6 +33,7 @@ public class ReplyService {
         return ReplyListResponseDTO.builder()
                 .replies(replies)
                 .count(count)
+                .pageInfo(new PageMaker(page, count))
                 .build();
 
     }
