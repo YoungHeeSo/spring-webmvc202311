@@ -1,8 +1,8 @@
 package com.spring.mvc.chap05.api;
 
 import com.spring.mvc.chap05.common.Page;
-import com.spring.mvc.chap05.dto.ReplyDetailResponseDTO;
-import com.spring.mvc.chap05.entity.Reply;
+import com.spring.mvc.chap05.dto.response.ReplyDetailResponseDTO;
+import com.spring.mvc.chap05.dto.response.ReplyListResponseDTO;
 import com.spring.mvc.chap05.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +30,9 @@ public class ReplyAPIController {
         log.info("/api/v1/replies/{}/page/{} : GET!!", boardNo, pageNo);
         Page page = new Page();
         page.setPageNo(pageNo);
-        page.setAmount(3);
+        page.setAmount(5);
 
-        List<ReplyDetailResponseDTO> replies = replyService.getList(boardNo, page);
+        ReplyListResponseDTO replies = replyService.getList(boardNo, page);
 
         return ResponseEntity.ok().body(replies);
     }
