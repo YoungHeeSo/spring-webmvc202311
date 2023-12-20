@@ -2,6 +2,7 @@ package com.spring.mvc.chap05.service;
 
 import com.spring.mvc.chap05.common.Page;
 import com.spring.mvc.chap05.common.PageMaker;
+import com.spring.mvc.chap05.dto.request.ReplyPostRequestDTO;
 import com.spring.mvc.chap05.dto.response.ReplyDetailResponseDTO;
 import com.spring.mvc.chap05.dto.response.ReplyListResponseDTO;
 import com.spring.mvc.chap05.entity.Reply;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +37,23 @@ public class ReplyService {
                 .count(count)
                 .pageInfo(new PageMaker(page, count))
                 .build();
+
+    }
+
+    // 댓글 등록 서비스
+    public ReplyListResponseDTO register(ReplyPostRequestDTO dto)throws SQLException{
+        log.debug("register services execute!!");
+
+        // dto 를 entity 로 변환
+        boolean flag = replyMapper.save(dto.toEntity());
+
+        if(!flag){
+            log.warn("reply register failed!!");
+            throw new SQLException("댓글 저장 실패!!");
+        }
+
+        // 등록이 성공하면 새롭게 갱신된 1페이지 댓글 내용을 재조회 해서 응답한다
+        return getList(dto.getBno(), new Page(1, 5));
 
     }
 
