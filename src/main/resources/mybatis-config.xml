@@ -14,6 +14,7 @@
         <typeAlias type="com.spring.mvc.chap06.entity.Person" alias="person" />
         <typeAlias type="com.spring.mvc.chap05.entity.Board" alias="board" />
         <typeAlias type="com.spring.mvc.chap05.entity.Reply" alias="reply"/>
+        <typeAlias type="com.spring.mvc.chap05.entity.Member" alias="member"/>
     </typeAliases>
 
     <!--  SQL 을 적어둔 XML 파일의 위치를 설정  -->
@@ -22,6 +23,7 @@
         <mapper resource="mappers/ScoreMapper.xml"/>
         <mapper resource="mappers/BoardMapper.xml"/>
         <mapper resource="mappers/ReplyMapper.xml"/>
+        <mapper resource="mappers/MemberMapper.xml"/>
     </mappers>
 
 </configuration>
