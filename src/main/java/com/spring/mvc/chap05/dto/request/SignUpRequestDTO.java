@@ -8,7 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Getter @ToString
+@Getter @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

@@ -50,6 +50,20 @@ public class MemberService {
         return SUCCESS;
     }
 
+    // 아이디, 이메일 중복 검사 서비스
+    public boolean checkDuplicateValue(String type, String keyword){
+
+        return memberMapper.isDuplicate(type, keyword);
+    }
+
+    /*
+        동기 통신 @Controller
+        비동기 통신 @RestController
+
+        동기 + 비동기 @Controller
+        => 비동기가 필요한 부분에 @ResponseBody
+     */
+
 
 
 }
