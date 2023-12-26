@@ -12,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/members")
 @Slf4j
@@ -67,7 +70,8 @@ public class MemberController {
             LoginRequestDTO dto,
             // Model 에 담긴 데이터를 redirect 으로 보내면 jsp 으로 가지 않는다
             // 왜냐면 리다이렉트는 요처이 2번 들어가서 첫번째 요청 시 보관한 데이터가 소실된다
-            RedirectAttributes ra
+            RedirectAttributes ra,
+            HttpServletResponse response
     ){
 
         log.info("/members/sign-in POST !");
@@ -79,10 +83,25 @@ public class MemberController {
         ra.addFlashAttribute("msg", result); // jsp 으로 데이터 를 보낼 때
 
         if(result == LoginResult.SUCCESS){ // 로그인 성공 시
-            return "redirect:/board/list";
+
+            // 로그인 정보를 쿠키 으로 저장
+            makerLoginCookie(dto, response);
+
+            return "redirect:/";
         }
 
         return "redirect:/members/sign-in"; // 로그인 실패 시 //redirect, URL 을 적음
+    }
+
+    private static void makerLoginCookie(LoginRequestDTO dto, HttpServletResponse response) {
+        // 쿠키에 로그인 기록 저장
+        Cookie cookie = new Cookie("login", dto.getAccount());// String 이외의 저장이 힘듦
+        // 쿠키 정보 세팅
+        cookie.setPath("/"); // 이 쿠키는 모든 경로 에서 들고 다녀야 함
+        cookie.setMaxAge(60); // 쿠키의 수명, 60초 유지
+
+        // 쿠키를 클라이언트에게 전송, 응답 객체가 필요함(Response 객체 필요)
+        response.addCookie(cookie);
     }
 
 
