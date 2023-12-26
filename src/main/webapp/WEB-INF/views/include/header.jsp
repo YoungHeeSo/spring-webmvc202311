@@ -9,7 +9,7 @@
                 <img src="/assets/img/logo.png" alt="로고이미지">
             </a>
         </h1>
-        <h2 class="intro-text">Welcome</h2>
+        <h2 class="intro-text">Welcome ${login == null ? '' : login.nickName}</h2>
         <a href="#" class="menu-open">
             <span class="menu-txt">MENU</span>
             <span class="lnr lnr-menu"></span>
@@ -25,8 +25,14 @@
             <li><a href="#">About</a></li>
             <li><a href="/board/list">Board</a></li>
             <li><a href="#">Contact</a></li>
-            <li><a href="/members/sign-up">Sign Up</a></li>  <!--회원 가입-->
-            <li><a href="/members/sign-in">Sign In</a></li> <!--로그인-->
+            <c:if test="${empty login}">
+                <li><a href="/members/sign-up">Sign Up</a></li>  <!--회원 가입-->
+                <li><a href="/members/sign-in">Sign In</a></li> <!--로그인-->
+            </c:if>
+            <c:if test="${not empty login}">
+                <li><a href="#">My page</a></li>
+                <li><a href="/members/sign-out">Sign Out</a></li>
+            </c:if>
 
         </ul>
     </nav>

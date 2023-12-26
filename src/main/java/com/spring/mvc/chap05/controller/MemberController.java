@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/members")
@@ -71,7 +73,8 @@ public class MemberController {
             // Model 에 담긴 데이터를 redirect 으로 보내면 jsp 으로 가지 않는다
             // 왜냐면 리다이렉트는 요처이 2번 들어가서 첫번째 요청 시 보관한 데이터가 소실된다
             RedirectAttributes ra,
-            HttpServletResponse response
+            HttpServletResponse response,
+            HttpServletRequest request
     ){
 
         log.info("/members/sign-in POST !");
@@ -84,8 +87,11 @@ public class MemberController {
 
         if(result == LoginResult.SUCCESS){ // 로그인 성공 시
 
-            // 로그인 정보를 쿠키 으로 저장
-            makerLoginCookie(dto, response);
+            // 쿠키로 로그인 유지
+            // makerLoginCookie(dto, response);
+
+            // 세션으로 로그인 유지
+            memberService.maintainLoginState(request.getSession(), dto.getAccount());
 
             return "redirect:/";
         }
@@ -102,6 +108,23 @@ public class MemberController {
 
         // 쿠키를 클라이언트에게 전송, 응답 객체가 필요함(Response 객체 필요)
         response.addCookie(cookie);
+    }
+
+    // 로그아웃 요청 처리
+    @GetMapping("/sign-out")
+    public String signOut(
+//            HttpServletRequest request // 다른 정보들 도 필요할 때
+            HttpSession session // 세션만 필요할 때
+    ){
+        // 세션얻기
+        // HttpSession session = request.getSession();
+
+        // 세션에서 로그인 정보 기록 삭제
+        session.removeAttribute("login");
+
+        // 세션을 초기화(RESET)
+        session.invalidate();
+        return "redirect:/";
     }
 
 
