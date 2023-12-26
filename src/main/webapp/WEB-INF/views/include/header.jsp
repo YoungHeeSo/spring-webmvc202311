@@ -25,8 +25,8 @@
             <li><a href="#">About</a></li>
             <li><a href="/board/list">Board</a></li>
             <li><a href="#">Contact</a></li>
-            <li><a href="/members/sign-up">Sign Up</a></li>
-            <li><a href="#">Sign In</a></li>
+            <li><a href="/members/sign-up">Sign Up</a></li>  <!--회원 가입-->
+            <li><a href="/members/sign-in">Sign In</a></li> <!--로그인-->
 
         </ul>
     </nav>

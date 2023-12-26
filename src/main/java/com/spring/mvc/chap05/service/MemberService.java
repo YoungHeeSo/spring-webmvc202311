@@ -39,8 +39,8 @@ public class MemberService {
         }
 
         //비밀 번호 일치 검사
-        String inputPassword = dto.getPassword(); // 사용자 입력 패스워드
-        String realPassword =foundMember.getPassword(); // 실제 패스워드
+        String inputPassword = dto.getPassword(); // 사용자 입력 패스워드, 암호화가 안된
+        String realPassword =foundMember.getPassword(); // 실제 패스워드, DB에 저장된
         if(!encoder.matches(inputPassword, realPassword)){
             log.info("비밀번호가 일치하지 않습니다!!");
             return NO_PW;
