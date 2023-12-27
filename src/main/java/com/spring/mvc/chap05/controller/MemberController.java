@@ -60,7 +60,12 @@ public class MemberController {
 
     // 로그인 양식 요청
     @GetMapping("/sign-in")
-    public String signIn(){
+    public String signIn(HttpSession session){
+
+        /*if(session.getAttribute("login")!=null){
+            return "redirect:/";
+        }*/
+
         log.info("/members/sign-in GET - forwarding to sign-in.jsp");
 
         return "/members/sign-in"; // forward, jsp 경로 적음
