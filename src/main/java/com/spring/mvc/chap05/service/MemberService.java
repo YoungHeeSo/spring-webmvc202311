@@ -82,8 +82,10 @@ public class MemberService {
                 .account(member.getAccount())
                 .email(member.getEmail())
                 .nickName(member.getName())
-                .auth(member.getAuth().toString())
+                .auth(member.getAuth().name())
                 .build();
+
+        log.debug("login: {}", dto);
 
         // member 객체는 DB 그 자체이므로 민감한 정보들이 건들 수 있으므로
         // 원하는 정보만 골라서 볼 수 있도록 한다
