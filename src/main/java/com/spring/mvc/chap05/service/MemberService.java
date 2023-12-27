@@ -82,7 +82,7 @@ public class MemberService {
                 .account(member.getAccount())
                 .email(member.getEmail())
                 .nickName(member.getName())
-                .auth(member.getAuto().toString())
+                .auth(member.getAuth().toString())
                 .build();
 
         // member 객체는 DB 그 자체이므로 민감한 정보들이 건들 수 있으므로

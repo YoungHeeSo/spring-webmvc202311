@@ -20,6 +20,8 @@ public class Board {
     private String content; // 내용
     private int viewCount; // 조회수
     private LocalDateTime regDateTime; // 작성일자시간
+    private String account;
+    // dto 는 db 랑 구조가 완전히 같아야 해
 
     public Board(int boardNo, String title, String content) {
         this.boardNo = boardNo;

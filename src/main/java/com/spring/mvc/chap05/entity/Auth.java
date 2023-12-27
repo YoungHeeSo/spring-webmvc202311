@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @AllArgsConstructor
 @Getter @ToString
-public enum Auto {
+public enum Auth {
     COMMON("일반회원",1 )
     , ADMIN("관리자회원", 2)
     ;
