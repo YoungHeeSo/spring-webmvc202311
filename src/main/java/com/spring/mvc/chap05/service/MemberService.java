@@ -5,6 +5,7 @@ import com.spring.mvc.chap05.dto.request.SignUpRequestDTO;
 import com.spring.mvc.chap05.dto.response.LoginUserResponseDTO;
 import com.spring.mvc.chap05.entity.Member;
 import com.spring.mvc.chap05.repository.MemberMapper;
+import com.spring.mvc.util.LoginUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 
 import static com.spring.mvc.chap05.service.LoginResult.*;
+import static com.spring.mvc.util.LoginUtils.*;
 
 @Service
 @Slf4j
@@ -80,13 +82,14 @@ public class MemberService {
                 .account(member.getAccount())
                 .email(member.getEmail())
                 .nickName(member.getName())
+                .auth(member.getAuto().toString())
                 .build();
 
         // member 객체는 DB 그 자체이므로 민감한 정보들이 건들 수 있으므로
         // 원하는 정보만 골라서 볼 수 있도록 한다
 
         // 세션에 로그인 한 회원의 정보 저장
-        session.setAttribute("login", dto);
+        session.setAttribute(LOGIN_KEY, dto);
         // 세션 수명을 설정 해야 함.
         session.setMaxInactiveInterval(60*60);
 

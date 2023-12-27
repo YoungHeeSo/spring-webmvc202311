@@ -1,5 +1,6 @@
 package com.spring.mvc.chap05.entity;
 
+import com.spring.mvc.chap05.dto.response.LoginUserResponseDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -25,5 +26,6 @@ public class Member {
     private String email;
     private Auto auto;
     private LocalDateTime regDate;
+    private LoginUserResponseDTO auth;
 
 }
