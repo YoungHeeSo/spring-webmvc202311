@@ -65,7 +65,7 @@ public class MemberService {
         // 자동 로그인 처리
         if(dto.isAutoLogin()){
             // 자동 로그인 쿠키를 생성 - 쿠키 안에 절대 중복되지 않는 값(브라우저의 세션 아이디)을 저장
-            Cookie autoLoginCookie = new Cookie("AUTO_LOGIN_COOKIE", session.getId());
+            Cookie autoLoginCookie = new Cookie(AUTO_LOGIN_COOKIE, session.getId());
 
             // 쿠키 설정 - 사용경로, 수명, ...
             int limitTime = 60 * 60 * 24 * 90; // 자동 로그인 유지시간

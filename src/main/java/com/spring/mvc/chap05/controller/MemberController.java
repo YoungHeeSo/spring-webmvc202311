@@ -135,6 +135,7 @@ public class MemberController {
 
             // 자동 로그인 상태인 지도 확인
             if(inAutoLogin(request)){
+                log.debug("자동로그인해제");
                 // 쿠키를 삭제해주고 디비 데이터도 원래대로 돌려놓는다
                 memberService.autoLoginClear(request, response);
             }
