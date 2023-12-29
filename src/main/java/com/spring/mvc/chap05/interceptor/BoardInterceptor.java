@@ -61,7 +61,6 @@ public class BoardInterceptor implements HandlerInterceptor {
                 return false;
             }
         }
-
         return true;
     }
 }

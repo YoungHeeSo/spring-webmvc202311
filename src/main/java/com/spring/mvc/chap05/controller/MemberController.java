@@ -82,13 +82,15 @@ public class MemberController {
             // 왜냐면 리다이렉트는 요처이 2번 들어가서 첫번째 요청 시 보관한 데이터가 소실된다
             RedirectAttributes ra,
             HttpServletResponse response,
-            HttpServletRequest request
+            HttpServletRequest request,
+            HttpSession session
     ){
 
         log.info("/members/sign-in POST !");
         log.debug("parameter : {}", dto);
 
-        LoginResult result = memberService.authenticate(dto);
+        LoginResult result = memberService.authenticate
+                (dto, session, response);
         log.debug("login result : {}", result);
 
         ra.addFlashAttribute("msg", result); // jsp 으로 데이터 를 보낼 때
@@ -121,18 +123,33 @@ public class MemberController {
     // 로그아웃 요청 처리
     @GetMapping("/sign-out")
     public String signOut(
-//            HttpServletRequest request // 다른 정보들 도 필요할 때
-            HttpSession session // 세션만 필요할 때
+            HttpServletRequest request // 다른 정보들 도 필요할 때
+            , HttpServletResponse response
+            // HttpSession session // 세션만 필요할 때
     ){
         // 세션얻기
-        // HttpSession session = request.getSession();
+         HttpSession session = request.getSession();
 
-        // 세션에서 로그인 정보 기록 삭제
-        session.removeAttribute(LOGIN_KEY);
+        // 로그인 상태인지 확인
+        if(isLogin(session)){
 
-        // 세션을 초기화(RESET)
-        session.invalidate();
-        return "redirect:/";
+            // 자동 로그인 상태인 지도 확인
+            if(inAutoLogin(request)){
+                // 쿠키를 삭제해주고 디비 데이터도 원래대로 돌려놓는다
+                memberService.autoLoginClear(request, response);
+            }
+
+
+            // 세션에서 로그인 정보 기록 삭제
+            session.removeAttribute(LOGIN_KEY);
+
+            // 세션을 초기화(RESET)
+            session.invalidate();
+            return "redirect:/";
+        }
+
+        return "redirect:/members/sign-in";
+
     }
 
 
