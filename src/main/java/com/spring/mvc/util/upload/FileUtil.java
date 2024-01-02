@@ -60,7 +60,7 @@ public class FileUtil {
         String directoryPath = rootPath;
         for (String s :
                 dateInfo) {
-            
+
             directoryPath += "/" + s;
             File f = new File(directoryPath);
             if(!f.exists()) f.mkdir();
