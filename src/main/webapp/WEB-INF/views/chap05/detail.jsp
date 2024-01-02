@@ -109,6 +109,26 @@
             color: #fff !important;
         }
 
+        /* 댓글 프로필 */
+        .profile-box {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 10px auto;
+        }
+        .profile-box img {
+            width: 100%;
+        }
+
+        .reply-profile {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+
+        }
+
     </style>
 </head>
 <body>
@@ -151,6 +171,19 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
+
+                                <!-- 댓글 프로필 -->
+                                <div class="profile-box">
+                                    <c:choose>
+                                        <c:when test="${login.profile != null}">
+                                            <img src="/local${login.profile}" alt="프사">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="/assets/img/anonymous.jpg" alt="프사">
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="newReplyWriter" hidden>댓글 작성자</label>
                                     <input id="newReplyWriter" name="replyWriter" type="text"

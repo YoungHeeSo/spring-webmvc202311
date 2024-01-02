@@ -118,6 +118,7 @@ public class MemberService {
                 .email(member.getEmail())
                 .nickName(member.getName())
                 .auth(member.getAuth().name())
+                .profile(member.getProfileImage())
                 .build();
 
         log.debug("login: {}", dto);
