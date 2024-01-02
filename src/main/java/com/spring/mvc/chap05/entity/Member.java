@@ -27,5 +27,6 @@ public class Member {
     private LocalDateTime regDate;
     private String sessionId;
     private LocalDateTime limitTime;
+    private String profileImage; // 프로필 사진 이미지 경로
 
 }

@@ -7,14 +7,14 @@
 
     <insert id="save">
         insert into tbl_member
-            (account, password, name, email)
+            (account, password, name, email, profile_image)
         values
-            (#{account}, #{password}, #{name}, #{email})
+            (#{account}, #{password}, #{name}, #{email}, #{profileImage})
     </insert>
 
     <select id="findMember" resultType="member">
         select
-            account, password, name, email, auth, reg_date
+            account, password, name, email, auth, reg_date, profile_image
         from tbl_member
         where account = #{account}
     </select>
