@@ -150,7 +150,6 @@
     </div>
 
     <!-- 댓글 영역 -->
-
     <div id="replies" class="row">
         <div class="offset-md-1 col-md-10">
             <!-- 댓글 쓰기 영역 -->
@@ -195,8 +194,6 @@
                             </div>
                         </div>
                     </c:if>
-
-
                 </div>
             </div> <!-- end reply write -->
 
@@ -219,6 +216,7 @@
                     </ul>
                 </div>
             </div> <!-- end reply content -->
+
         </div>
     </div> <!-- end replies row -->
 
@@ -308,13 +306,16 @@
         if(replies!==null && replies.length > 0){
 
             for (let reply of replies) {
-                const { rno, writer, text, regDate, account } = reply;
+                const { rno, writer, text, regDate, account, profile } = reply;
 
                 tag += `
                     <div id='replyContent' class='card-body' data-replyId='\${rno}'>
                         <div class='row user-block'>
-                            <span class='col-md-3'>
-                                <b>\${writer}</b>
+                            <span class='col-md-8'>`;
+
+                tag+= (profile ? `<img class="reply-profile" src="/local\${profile}" alt="profile image">` : `<img class="reply-profile" src="/assets/img/anonymous.jpg" alt="anonymous image">`)
+
+                    tag += `<b>\${writer}</b>
                             </span>
                             <span class='offset-md-6 col-md-3 text-right'><b>\${regDate}</b></span>
                         </div><br>
