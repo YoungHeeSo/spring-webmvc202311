@@ -80,18 +80,17 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td
-                                        style="width: 100%; text-align: center; colspan: 2; margin-top: 24px; padding-top: 12px; border-top: 1px solid #ececec">
+                                <td style="width: 100%; text-align: center; colspan: 2; margin-top: 24px; padding-top: 12px; border-top: 1px solid #ececec">
 
-                                    <a class="btn form-control tooltipstered" href="/members/sign-up"
-                                       style="cursor: pointer; margin-top: 0; height: 40px; color: white; background-color: #808080; border: 0px solid #388E3C; opacity: 0.8">
-                                        회원가입</a>
+                                    <a class="btn form-control tooltipstered" href="/members/sign-up" style="cursor: pointer; margin-top: 0; height: 40px; color: white; background-color: #808080; border: 0px solid #388E3C; opacity: 0.8">
+                                        회원가입
+                                    </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td	style="width: 100%; text-align: center; colspan: 2; margin-top: 24px; padding-top: 12px; border-top: 1px solid #ececec">
 
-                                    <a id="custom-login-btn" href="https://kauth.kakao.com/oauth/authorize?client_id=${kakaoAppKey}&redirect_uri=http://gondue.co.kr${kakaoRedirect}&response_type=code">
+                                    <a id="custom-login-btn" href="/kakao/login">
                                         <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
                                     </a>
                                 </td>
