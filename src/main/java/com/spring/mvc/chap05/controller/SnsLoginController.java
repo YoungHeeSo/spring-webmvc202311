@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -41,7 +42,7 @@ public class SnsLoginController {
 
         // 인가 코드를 가지고 kakao 인증 서버에 토큰 발급 요청을 보냄
         //server to server 통신
-        HashMap<String , String> params = new HashMap<>();
+        Map<String , String> params = new HashMap<>();
         params.put("appkey", kakaoAppKey);
         params.put("redirect", kakaoRedirectUri);
         params.put("code", code);

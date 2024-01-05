@@ -9,6 +9,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import static com.spring.mvc.chap05.entity.Member.*;
+
 @Getter @Setter
 @ToString
 @NoArgsConstructor
@@ -32,6 +34,9 @@ public class SignUpRequestDTO {
     // 프로필 사진 파일
     private MultipartFile profileImage;
 
+    // 로그인 방식
+    private LoginMethod loginMethod;
+
     // 엔터티로 변환하는 유틸 메서드
     public Member toEntity(PasswordEncoder encoder, String savePath){
         return Member.builder()
@@ -40,6 +45,7 @@ public class SignUpRequestDTO {
                 .email(email)
                 .name(name)
                 .profileImage(savePath)
+                .loginMethod(loginMethod)
                 .build();
     }
 

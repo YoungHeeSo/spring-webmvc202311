@@ -2,6 +2,7 @@ package com.spring.mvc.chap05.service;
 
 import com.spring.mvc.chap05.dto.request.SignUpRequestDTO;
 import com.spring.mvc.chap05.dto.response.KakaoUserResponseDTO;
+import com.spring.mvc.chap05.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -24,10 +25,10 @@ public class SnsLoginService {
     private final MemberService memberService;
 
     // 카카오 로그인 처리
-    public void kakaoLogin(Map<String, String > requestParam, HttpSession session) {
+    public void kakaoLogin(Map<String, String> requestParam, HttpSession session) {
 
         // 인가 코드를 가지고 토큰을 발급받는 요청보내기
-        String accessToken = getKakaoAccessToken(requestParam, session);
+        String accessToken = getKakaoAccessToken(requestParam);
         log.debug("access_token: {}", accessToken);
 
         // 토큰을 통해서 사용자 정보 가져오기
@@ -43,11 +44,14 @@ public class SnsLoginService {
                             .password("0000")
                             .name(nickname)
                             .email(nickname + "@abc.com")
+                            .loginMethod(Member.LoginMethod.KAKAO)
                             .build(),
                     dto.getProperties().getProfileImage()
             );
         }
 
+        // 우리 사이트 로그인 처리
+        memberService.maintainLoginState(session, nickname);
     }
 
     // 토큰으로 사용자 정보 요청
@@ -77,7 +81,7 @@ public class SnsLoginService {
     }
 
     // 토큰 발급 요청
-    private String getKakaoAccessToken(Map<String, String> requestParam, HttpSession session) {
+    private String getKakaoAccessToken(Map<String, String> requestParam) {
 
         // 요청 URI
         String requestUri = "https://kauth.kakao.com/oauth/token";

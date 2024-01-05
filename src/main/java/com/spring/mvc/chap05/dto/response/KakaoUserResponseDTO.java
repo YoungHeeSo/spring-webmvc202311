@@ -14,7 +14,6 @@ public class KakaoUserResponseDTO {
     private Long id;
     @JsonProperty("connected_at")
     private LocalDateTime connectedAt;
-//    private Object properties;
     private Properties properties;
 
     @Setter@Getter@ToString
